@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Withdrawal Confirmation</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <link rel="stylesheet" th:href="@{/css/style-dispense.css}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col">
+            <p id="instruction">Dispensing of cash...</p>
+        </div>
+    </div>
+
+    <table class="table table-bordered border table-striped text-center">
+        <thead class="table-secondary">
+        <tr>
+            <th>Value</th>
+            <th>Count</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="dispense : ${withdrawal}">
+
+            <td th:text="${#numbers.formatDecimal(dispense.value,0,2,'POINT')}"></td>
+            <td th:text="${dispense.count}"></td>
+        </tr>
+        </tbody>
+
+    </table>
+</div>
+
+</body>
+
+</html>

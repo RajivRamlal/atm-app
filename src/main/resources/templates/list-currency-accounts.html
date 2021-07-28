@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Currency Account Balances</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <link rel="stylesheet" th:href="@{/css/style-currency.css}">
+</head>
+
+<body>
+<div class="container">
+    <h1>Currency Account Balances</h1>
+
+    <table class="table table-bordered border table-striped text-center">
+        <thead class="table-secondary">
+        <tr>
+            <th>Account<br>Number</th>
+            <th>Currency</th>
+            <th>Currency<br>Balance</th>
+            <th>Conversion<br>Rate</th>
+            <th>ZAR<br>Amount</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="account : ${currencyAccounts}">
+
+            <td th:text="${account.accountNumber}"></td>
+            <td th:text="${account.currencyCode}"></td>
+            <td th:text="${#numbers.formatDecimal(account.accountBalance, 0, 2, 'POINT')}"></td>
+            <td th:text="${account.conversionRate}"></td>
+            <td th:text="${#numbers.formatDecimal(account.convertedAmount, 0, 2, 'POINT')}"></td>
+
+        </tr>
+        </tbody>
+
+    </table>
+
+    <button type="button" class="btn btn-secondary float-right">Back</button>
+
+</div>
+
+</body>
+
+</html>

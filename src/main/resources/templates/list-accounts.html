@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Transactional Account Balances</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+<div class="container">
+    <h1>Transactional Account Balances</h1>
+
+    <table class="table table-bordered border table-striped text-center">
+        <thead class="table-secondary">
+        <tr>
+            <th>Account Number</th>
+            <th>Account Type</th>
+            <th>Account Balance</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="account : ${accounts}">
+
+            <td th:text="${account.accountNumber}"></td>
+            <td th:text="${account.accountType}"></td>
+            <td th:text="${#numbers.formatDecimal(account.accountBalance, 0, 2, 'POINT')}"></td>
+
+        </tr>
+        </tbody>
+
+    </table>
+
+    <button type="button" class="btn btn-secondary float-right">Back</button>
+
+</div>
+
+</body>
+
+</html>

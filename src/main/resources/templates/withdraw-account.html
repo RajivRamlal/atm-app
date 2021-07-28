@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Draw From Account</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <link rel="stylesheet" th:href="@{/css/style-withdraw.css}">
+
+    <script type="text/javascript" th:src="@{/js/withdraw.js}"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Draw From Account</h1>
+
+        <form name="withdrawForm"
+              action="#" th:action="@{/withdraw/account/{atmId}/{accountNumber}/{clientId}(atmId = ${withdraw.atmId}, accountNumber = ${withdraw.accountNumber}, clientId = ${withdraw.clientId})}"
+              th:object="${withdrawModel}" method="get">
+
+            <div class="row">
+                <div class="col-2">
+                    <label>Type:</label>
+                </div>
+
+                <div class="col">
+                    <label th:text="${withdraw.accountType}"></label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-2">
+                    <label>Number:</label>
+                </div>
+
+                <div class="col">
+                    <label th:text="${withdraw.accountNumber}"></label>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-3">
+                    <label for="withdrawAmount">Required Amount</label><br>
+                    <input type="text" placeholder="Required Amount" id="withdrawAmount" name="amount"
+                           th:onkeypress="javascript:return isNumber(event)" th:field="*{amount}" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <input type="submit" class="btn btn-secondary btn-sm float-right" value="Submit" />
+                </div>
+            </div>
+
+        </form>
+    </div>
+</body>
+
+</html>

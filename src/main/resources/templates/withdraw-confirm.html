@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Withdrawal Confirmation</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <link rel="stylesheet" th:href="@{/css/style-confirm.css}">
+
+    <script type="text/javascript" th:src="@{/js/confirm.js}"></script>
+</head>
+
+<body th:object="${withdrawalDetails}">
+
+    <script>
+        window.addEventListener("load", loadInstruction);
+    </script>
+
+    <div class="container" th:object="${withdrawal}">
+
+        <div class="row">
+            <div class="col">
+                <p id="instruction"></p>
+            </div>
+        </div>
+
+        <form action="#" th:action="@{/withdraw/{atmId}/{clientId}/{accountNumber}/{amount}(atmId = ${withdrawalDetails.atmId},
+            clientId = ${withdrawalDetails.clientId},
+            accountNumber = ${withdrawalDetails.accountNumber},
+            amount = ${withdrawalDetails.amount})}"
+              method="post">
+
+            <script th:inline="javascript">
+<!--                atmId = /*[[${withdrawalDetails.atmId}]]*/ 25;-->
+<!--                accountNumber = /*[[${withdrawalDetails.accountNumber}]]*/ 1234567890;-->
+                amount = /*[[${withdrawalDetails.amount}]]*/ 0;
+
+                var withdrawList = /*[[${withdrawal}]]*/
+                for (i = 0; i < withdrawList.length; i++) {
+                    totalDispense += (Number(withdrawList[i].value) * Number(withdrawList[i].count));
+                }
+            </script>
+
+            <div class="row">
+                <div class="col-6">
+                    <input type="submit" class="btn btn-secondary btn-lg float-left" value="Yes" />
+                </div>
+
+                <div class="col-6">
+<!--                    <a th:href="@{/cancel}">-->
+<!--                        <input type="reset" class="btn btn-secondary btn-lg float-right" value="Cancel" />-->
+<!--                    </a>-->
+                    <a class="btn btn-secondary btn-lg float-right" th:href="@{/cancel}">Cancel</a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</body>
+
+</html>
